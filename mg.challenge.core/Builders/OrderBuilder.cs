@@ -14,6 +14,13 @@ namespace Mg.Challenge.Core.Builders
             RegisterMapping(3, (dto, str) => dto.Number = str);
             RegisterChildDto(new TimingBuilder(), (dto, timing) => dto.Timings = timing);
             RegisterChildDto(new BuyerBuilder(), (dto, buyer) => dto.Buyer = buyer);
+            RegisterChildDto(new ItemBuilder(), (dto, item) =>
+            {
+                if (dto.Items == null)
+                    dto.Items = new List<ItemDto>();
+
+                dto.Items.Add(item);
+            });
         }
     }
 }

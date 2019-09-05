@@ -8,7 +8,7 @@ namespace Mg.Challenge.Core.Models
     {
         public DateTime Date { get; set; }
         public string Type { get; set; }
-        public IEnumerable<OrderDto> Orders { get; set; }
+        public List<OrderDto> Orders { get; set; }
         public EnderDto Ender { get; set; }
     }
 }

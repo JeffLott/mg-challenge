@@ -10,7 +10,7 @@ namespace Mg.Challenge.Core.Models
         public string Code { get; set; }
         public string Number { get; set; }
         public BuyerDto Buyer { get; set; }
-        public IEnumerable<ItemDto> Items { get; set; }
+        public List<ItemDto> Items { get; set; }
         public TimingsDto Timings { get; set; }
     }
 }

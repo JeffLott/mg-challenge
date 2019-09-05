@@ -29,8 +29,10 @@ namespace Mg.Challenge.Tests.Builders
             var testData = new[] {
                 "\"O\",\"08/04/2018\",\"ONF002793300\",\"080427bd1\"",
                 "\"T\",\"3\",\"3\",\"0\",\"2\",\"0\"",
-                 "\"B\",\"Brett Nagy\",\"5825 221st Place S.E.\",\"98027\""
-                };
+                "\"B\",\"Brett Nagy\",\"5825 221st Place S.E.\",\"98027\"",
+                "\"L\",\"602527788265\",\"02\"",
+                "\"L\",\"602517642850\",\"01\""
+            };
 
             var sut = new OrderBuilder();
 
@@ -38,6 +40,7 @@ namespace Mg.Challenge.Tests.Builders
 
             Assert.NotNull(result.Timings);
             Assert.NotNull(result.Buyer);
+            Assert.AreEqual(2, result.Items.Count);
         }
     }
 }
