@@ -1,4 +1,7 @@
+using FluentAssertions;
+using Mg.Challenge.Core.Models;
 using Mg.Challenge.Core.Services;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
 
@@ -9,13 +12,17 @@ namespace Tests
         [Test]
         public void ParsingTest()
         {
-            var data = TestInput.Split(Environment.NewLine);
+            var data = TestInput.Trim().Split(Environment.NewLine);
 
             var sut = new FileParsingService();
 
             var response = sut.Parse(data);
 
+            var expected = JsonConvert.DeserializeObject<FileDto>(TestOutput);
+
             Assert.NotNull(response);
+
+            response.Should().BeEquivalentTo(expected);
         }
 
         #region TestData
@@ -32,7 +39,7 @@ namespace Tests
         private const string TestOutput = @"
         {
             ""date"":""08/04/2018"",
-            ""type"":""By Batch #"",
+            ""type"":"" By Batch #"",
             ""orders"":[
                 {
                     ""date"":""08/04/2018"",

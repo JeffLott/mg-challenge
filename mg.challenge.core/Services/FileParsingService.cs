@@ -1,4 +1,5 @@
-﻿using Mg.Challenge.Core.Models;
+﻿using Mg.Challenge.Core.Builders;
+using Mg.Challenge.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +10,11 @@ namespace Mg.Challenge.Core.Services
     {
         public FileDto Parse(string[] lines)
         {
-            throw new NotImplementedException();
+            var fileBuilder = new FileBuilder();
+
+            var result = fileBuilder.Build(lines);
+
+            return result.Item1;
         }
     }
 }
