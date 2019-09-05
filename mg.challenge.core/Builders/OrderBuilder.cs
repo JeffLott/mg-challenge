@@ -12,6 +12,8 @@ namespace Mg.Challenge.Core.Builders
             RegisterMapping(1, (dto, date) => dto.Date = date);
             RegisterMapping(2, (dto, str) => dto.Code = str);
             RegisterMapping(3, (dto, str) => dto.Number = str);
+            RegisterChildDto(new TimingBuilder(), (dto, timing) => dto.Timings = timing);
+            RegisterChildDto(new BuyerBuilder(), (dto, buyer) => dto.Buyer = buyer);
         }
     }
 }

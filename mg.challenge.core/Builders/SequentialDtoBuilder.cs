@@ -10,12 +10,15 @@ namespace Mg.Challenge.Core.Builders
         where TDto : new()
     {
         protected Dictionary<int, Action<TDto, string>> _propertyMappers = new Dictionary<int, Action<TDto, string>>();
+        protected Dictionary<string, Func<TDto, string[], int, int>> _handlers = new Dictionary<string, Func<TDto, string[], int, int>>();
         private string _recordType;
 
         public SequentialDtoBuilder(string recordType)
         {
             _recordType = recordType;
         }
+
+        public string RecordType => _recordType;
 
         protected void RegisterMapping(int offset, Action<TDto, int> setter)
         {
@@ -59,9 +62,22 @@ namespace Mg.Challenge.Core.Builders
                 throw new ArgumentException($"Offset {offset} has already been registered for {typeof(TDto).Name}");
         }
 
-        public TDto Build(string[] inputs)
+        protected void RegisterChildDto<TProp>(SequentialDtoBuilder<TProp> builder, Action<TDto, TProp> setter) where TProp : new()
         {
-            var splitLine = inputs[0].Trim().Split(',');
+            if (!_handlers.ContainsKey(builder.RecordType))
+            {
+                _handlers.Add(builder.RecordType, (dto, strings, start) =>
+                {
+                    setter(dto, builder.Build(strings, start));
+
+                    return start + 1;
+                });
+            }
+        }
+
+        public TDto Build(string[] inputs, int startingLine = 0)
+        {
+            var splitLine = inputs[startingLine].Trim().Split(',');
 
             // We only want to process our lines.
             if(splitLine[0].Clean() == _recordType)
@@ -72,6 +88,17 @@ namespace Mg.Challenge.Core.Builders
                 {
                     if (_propertyMappers.ContainsKey(i))
                         _propertyMappers[i](dto, splitLine[i].Clean());
+                }
+
+                for(int i = startingLine + 1; i < inputs.Length; i = i)
+                {
+                    var split = inputs[i].Split(',');
+                    var recordType = split[0].Clean();
+
+                    if (!_handlers.ContainsKey(recordType))
+                        return dto;
+                    else
+                        i = _handlers[recordType](dto, inputs, i);
                 }
 
                 return dto;

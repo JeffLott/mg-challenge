@@ -21,5 +21,20 @@ namespace Mg.Challenge.Tests.Builders
             Assert.AreEqual(result.Type, " By Batch #");
             Assert.AreEqual(result.Date, new DateTime(2018, 08, 04));
         }
+
+        [Test]
+        public void BuildsChildren()
+        {
+            var testData = new[] {
+                "\"F\",\"08/04/2018\",\" By Batch #\"",
+                "\"E\",\"1\",\"2\",\"9\""
+            };
+
+            var sut = new FileBuilder();
+
+            var result = sut.Build(testData);
+
+            Assert.NotNull(result.Ender);
+        }
     }
 }

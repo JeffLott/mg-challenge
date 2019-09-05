@@ -22,5 +22,22 @@ namespace Mg.Challenge.Tests.Builders
             Assert.AreEqual(result.Code, "ONF002793300");
             Assert.AreEqual(result.Number, "080427bd1");
         }
+
+        [Test]
+        public void BuildsChildren()
+        {
+            var testData = new[] {
+                "\"O\",\"08/04/2018\",\"ONF002793300\",\"080427bd1\"",
+                "\"T\",\"3\",\"3\",\"0\",\"2\",\"0\"",
+                 "\"B\",\"Brett Nagy\",\"5825 221st Place S.E.\",\"98027\""
+                };
+
+            var sut = new OrderBuilder();
+
+            var result = sut.Build(testData);
+
+            Assert.NotNull(result.Timings);
+            Assert.NotNull(result.Buyer);
+        }
     }
 }

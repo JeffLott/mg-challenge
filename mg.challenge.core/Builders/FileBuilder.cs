@@ -11,6 +11,7 @@ namespace Mg.Challenge.Core.Builders
         {
             RegisterMapping(1, (dto, dt) => dto.Date = dt);
             RegisterMapping(2, (dto, str) => dto.Type = str);
+            RegisterChildDto(new EnderBuilder(), (dto, ender) => dto.Ender = ender);
         }
     }
 }
