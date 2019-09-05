@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Mg.Challenge.Core.Builders
 {
-    public class LineBuilder : SequentialDtoBuilder<ItemDto>
+    public class ItemBuilder : SequentialDtoBuilder<ItemDto>
     {
-        public LineBuilder() : base("L")
+        public ItemBuilder() : base("L")
         {
             RegisterMapping(1, (dto, str) => dto.Sku = str);
             RegisterMapping(2, (dto, num) => dto.Qty = num);
