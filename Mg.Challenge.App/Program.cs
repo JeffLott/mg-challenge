@@ -11,9 +11,9 @@ namespace Mg.Challenge.App
             var parsingService = new FileParsingService();
             var writer = new JsonFileWriter();
 
-            Console.WriteLine("Please enter the full path to the CSV file:");
+            Console.WriteLine("Please enter the full path to the input CSV file:");
             var inputPath = Console.ReadLine();
-            Console.WriteLine("Please enter the output path for the JSON file:");
+            Console.WriteLine("Please enter the full path for the output JSON file:");
             var outputPath = Console.ReadLine();
 
             var lines = fileAccessor.ReadFile(inputPath);
