@@ -15,7 +15,7 @@ namespace Mg.Challenge.Tests.Builders
 
             var sut = new LineBuilder();
 
-            var result = sut.Build(testData);
+            var result = sut.Build(testData).Item1;
 
             Assert.AreEqual(result.Sku, "602527788265");
             Assert.AreEqual(result.Qty, 2);

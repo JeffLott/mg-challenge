@@ -16,7 +16,7 @@ namespace Mg.Challenge.Tests.Builders
 
             var sut = new EnderBuilder();
 
-            var result = sut.Build(testData);
+            var result = sut.Build(testData).Item1;
 
             Assert.AreEqual(result.Process, 1);
             Assert.AreEqual(result.Paid, 2);

@@ -16,7 +16,7 @@ namespace Mg.Challenge.Tests.Builders
 
             var sut = new FileBuilder();
 
-            var result = sut.Build(testData);
+            var result = sut.Build(testData).Item1;
 
             Assert.AreEqual(result.Type, " By Batch #");
             Assert.AreEqual(result.Date, new DateTime(2018, 08, 04));
@@ -32,7 +32,7 @@ namespace Mg.Challenge.Tests.Builders
 
             var sut = new FileBuilder();
 
-            var result = sut.Build(testData);
+            var result = sut.Build(testData).Item1;
 
             Assert.NotNull(result.Ender);
         }

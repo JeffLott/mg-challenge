@@ -68,14 +68,16 @@ namespace Mg.Challenge.Core.Builders
             {
                 _handlers.Add(builder.RecordType, (dto, strings, start) =>
                 {
-                    setter(dto, builder.Build(strings, start));
+                    var child = builder.Build(strings, start);
 
-                    return start + 1;
+                    setter(dto, child.Item1);
+
+                    return child.Item2;
                 });
             }
         }
 
-        public TDto Build(string[] inputs, int startingLine = 0)
+        public (TDto, int) Build(string[] inputs, int startingLine = 0)
         {
             var splitLine = inputs[startingLine].Trim().Split(',');
 
@@ -96,15 +98,15 @@ namespace Mg.Challenge.Core.Builders
                     var recordType = split[0].Clean();
 
                     if (!_handlers.ContainsKey(recordType))
-                        return dto;
+                        return (dto, i);
                     else
                         i = _handlers[recordType](dto, inputs, i);
                 }
 
-                return dto;
+                return (dto, inputs.Length);
             }
 
-            return default(TDto);
+            return (default(TDto), 0);
         }
     }
 }

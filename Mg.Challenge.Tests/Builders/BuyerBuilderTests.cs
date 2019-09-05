@@ -16,7 +16,7 @@ namespace Mg.Challenge.Tests.Builders
 
             var sut = new BuyerBuilder();
 
-            var result = sut.Build(testData);
+            var result = sut.Build(testData).Item1;
 
             Assert.AreEqual(result.Name, "Brett Nagy");
             Assert.AreEqual(result.Street, "5825 221st Place S.E.");

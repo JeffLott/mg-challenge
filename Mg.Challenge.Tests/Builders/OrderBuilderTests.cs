@@ -16,7 +16,7 @@ namespace Mg.Challenge.Tests.Builders
 
             var sut = new OrderBuilder();
 
-            var result = sut.Build(testData);
+            var result = sut.Build(testData).Item1;
 
             Assert.AreEqual(result.Date, new DateTime(2018, 08, 04));
             Assert.AreEqual(result.Code, "ONF002793300");
@@ -34,7 +34,7 @@ namespace Mg.Challenge.Tests.Builders
 
             var sut = new OrderBuilder();
 
-            var result = sut.Build(testData);
+            var result = sut.Build(testData).Item1;
 
             Assert.NotNull(result.Timings);
             Assert.NotNull(result.Buyer);

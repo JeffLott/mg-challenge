@@ -16,7 +16,7 @@ namespace Mg.Challenge.Tests.Builders
 
             var sut = new TimingBuilder();
 
-            var result = sut.Build(testData);
+            var result = sut.Build(testData).Item1;
 
             Assert.AreEqual(result.Start, 3);
             Assert.AreEqual(result.Stop, 3);
